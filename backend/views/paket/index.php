@@ -28,8 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'hotel_id',
+            [
+                'attribute' => 'hotel_id',
+                'value' => function ($model) {
+                    return $model->hotel->nama;
+                },
+            ],
             'kategori',
             'nama',
             'harga',
