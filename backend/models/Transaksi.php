@@ -41,7 +41,8 @@ class Transaksi extends \yii\db\ActiveRecord
             [['account_id', 'paket_id'], 'integer'],
             [['tgl_pemesanan', 'tgl_pembayaran', 'createdAt', 'updateAt'], 'safe'],
             [['status', 'alamat_pemesanan'], 'string'],
-            [['bukti_pembayaran'], 'string', 'max' => 255],
+            // [['bukti_pembayaran'], 'string', 'max' => 255],
+            [['bukti_pembayaran'], 'file'],
             [['paket_id'], 'exist', 'skipOnError' => true, 'targetClass' => Paket::class, 'targetAttribute' => ['paket_id' => 'id']],
             [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => Account::class, 'targetAttribute' => ['account_id' => 'id']],
         ];

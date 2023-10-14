@@ -13,6 +13,11 @@ $config = [
     ],
     'components' => [
         'request' => [
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
+            'enableCookieValidation' => true,
+            'enableCsrfValidation' => true,
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 's3_GdDvVmcVFh6DGRgNfnEdit_ThcVeC',
         ],
@@ -54,6 +59,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                // ['class' => 'yii\rest\UrlRule', 'controller' => 'transaksi'],
             ],
         ],
        
@@ -79,6 +85,7 @@ $config = [
             'crudTidyOutput' => true,
         ]
     ],
+    
     
 ];
 
