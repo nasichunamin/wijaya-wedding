@@ -15,8 +15,13 @@ use Yii;
  * @property string $jenis_kelamin
  * @property string $tgl_lahir
  * @property string $no_telepon
+ * @property string $token
+ * @property string|null $createdAt
+ * @property string|null $updateAt
+ * @property string|null $deleteAt
  *
  * @property Transaksi[] $transaksis
+ * @property UserAuth[] $userAuths
  */
 class Account extends \yii\db\ActiveRecord
 {
@@ -34,12 +39,13 @@ class Account extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password', 'role', 'nama_lengkap', 'jenis_kelamin', 'tgl_lahir', 'no_telepon'], 'required'],
+            [['username', 'password', 'role', 'nama_lengkap', 'jenis_kelamin', 'tgl_lahir', 'no_telepon', 'token'], 'required'],
             [['jenis_kelamin'], 'string'],
-            [['tgl_lahir'], 'safe'],
+            [['tgl_lahir', 'createdAt', 'updateAt', 'deleteAt'], 'safe'],
             [['username', 'no_telepon'], 'string', 'max' => 100],
             [['password', 'nama_lengkap'], 'string', 'max' => 255],
             [['role'], 'string', 'max' => 10],
+            [['token'], 'string', 'max' => 32],
         ];
     }
 
@@ -57,6 +63,10 @@ class Account extends \yii\db\ActiveRecord
             'jenis_kelamin' => 'Jenis Kelamin',
             'tgl_lahir' => 'Tgl Lahir',
             'no_telepon' => 'No Telepon',
+            'token' => 'Token',
+            'createdAt' => 'Created At',
+            'updateAt' => 'Update At',
+            'deleteAt' => 'Delete At',
         ];
     }
 
@@ -68,5 +78,15 @@ class Account extends \yii\db\ActiveRecord
     public function getTransaksis()
     {
         return $this->hasMany(Transaksi::class, ['account_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[UserAuths]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserAuths()
+    {
+        return $this->hasMany(UserAuth::class, ['account_id' => 'id']);
     }
 }

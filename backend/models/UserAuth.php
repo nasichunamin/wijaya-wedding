@@ -31,8 +31,8 @@ class UserAuth extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'account_id', 'token'], 'required'],
-            [['id', 'account_id'], 'integer'],
+            [['account_id', 'token'], 'required'],
+            [['account_id'], 'integer'],
             [['createdAt', 'updateAt'], 'safe'],
             [['token'], 'string', 'max' => 32],
             [['account_id'], 'exist', 'skipOnError' => true, 'targetClass' => Account::class, 'targetAttribute' => ['account_id' => 'id']],
