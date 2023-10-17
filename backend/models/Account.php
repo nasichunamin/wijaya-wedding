@@ -17,7 +17,7 @@ use Yii;
  * @property string $no_telepon
  * @property string $token
  * @property string|null $createdAt
- * @property string|null $updateAt
+ * @property string|null $updatedAt
  * @property string|null $deleteAt
  *
  * @property Transaksi[] $transaksis
@@ -39,9 +39,9 @@ class Account extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password', 'role', 'nama_lengkap', 'jenis_kelamin', 'tgl_lahir', 'no_telepon', 'token'], 'required'],
+            [['username', 'password', 'role', 'nama_lengkap', 'jenis_kelamin', 'tgl_lahir', 'no_telepon'], 'required'],
             [['jenis_kelamin'], 'string'],
-            [['tgl_lahir', 'createdAt', 'updateAt', 'deleteAt'], 'safe'],
+            [['tgl_lahir', 'createdAt', 'updatedAt', 'deleteAt'], 'safe'],
             [['username', 'no_telepon'], 'string', 'max' => 100],
             [['password', 'nama_lengkap'], 'string', 'max' => 255],
             [['role'], 'string', 'max' => 10],
@@ -65,7 +65,7 @@ class Account extends \yii\db\ActiveRecord
             'no_telepon' => 'No Telepon',
             'token' => 'Token',
             'createdAt' => 'Created At',
-            'updateAt' => 'Update At',
+            'updatedAt' => 'Update At',
             'deleteAt' => 'Delete At',
         ];
     }

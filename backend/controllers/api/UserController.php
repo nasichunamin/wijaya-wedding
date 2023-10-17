@@ -52,15 +52,30 @@ class UserController extends RestController
 
     public function actionCreate()
     {
+        $body = $this->getRawBody();
         $request = Yii::$app->request;
 
         $user = new Account();
-        $user->name = $request->post('name');
-        $user->username = $request->post('username');
-        $user->password = $request->post('password');
+        $user->username = $body['username'];
+        $user->password = md5($body['password']);
+        $user->role = $body['role'];
+        $user->nama_lengkap = $body['nama_lengkap'];
+        $user->jenis_kelamin = $body['jenis_kelamin'];
+        $user->tgl_lahir = $body['tgl_lahir'];
+        $user->no_telepon = $body['no_telepon'];
+        $user->createdAt = date('Y-m-d H:i:s');
+        $user->updatedAt = date('Y-m-d H:i:s');
         $user->save();
+        return $this->output(['message' => 'berhasil daftar akun','data' => $user], 200);
 
-        return $this->output($user);
+
+        // $user = new Account();
+        // $user->name = $request->post('name');
+        // $user->username = $request->post('username');
+        // $user->password = $request->post('password');
+        // $user->save();
+
+        // return $this->output($user);
     }
 
     public function actionUpdate($id)
