@@ -15,11 +15,13 @@ class UserController extends RestController
         return $this->output(User::find()->all());
     }
 
-    public function actionLogin($username, $password)
+    public function actionLogin()
     {
-        $findUser = Account::find()->where(["username" => $username])->one();
+        $body = $this->getRawBody();
+
+        $findUser = Account::find()->where(["username" => $body['username']])->one();
         if ($findUser) {
-            if ($findUser->password != md5($password)) {
+            if ($findUser->password != md5($body['password'])) {
                 return $this->output(["password yang anda masukkan salah."], 500);
             }
             $user = $this->findModel($findUser->id);
@@ -43,7 +45,7 @@ class UserController extends RestController
             }
         }else{
             return $this->output([
-                'data' => 'tes belum ada', 500
+                'data' => 'akun tidak ditemukan', 500
             ]);
         }
     }
@@ -52,7 +54,7 @@ class UserController extends RestController
     {
         $request = Yii::$app->request;
 
-        $user = new User();
+        $user = new Account();
         $user->name = $request->post('name');
         $user->username = $request->post('username');
         $user->password = $request->post('password');
