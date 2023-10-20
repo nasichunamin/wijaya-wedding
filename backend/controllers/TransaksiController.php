@@ -147,6 +147,16 @@ class TransaksiController extends Controller
         // ]);
     }
 
+    public function actionApprovePembayaran($id)
+    {
+        $model = $this->findModel($id);
+
+        $model->status = 'Disetujui';
+
+        $model->save();
+        return $this->redirect('index'); 
+    }
+
     /**
      * Deletes an existing Transaksi model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

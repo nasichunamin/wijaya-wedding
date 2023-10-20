@@ -43,8 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'format' => 'raw', // Format kolom sebagai HTML
                 'value' => function ($model) {
-                    if ($model->status === 'Pending') {
-                        return Html::a('Konfirmasi Pembayaran', ['konfirmasi-action', 'id' => $model->id], ['class' => 'btn btn-success btn-sm']);
+                    if ($model->status === 'Menunggu Konfirmasi') {
+                        return Html::a('Konfirmasi Pembayaran', ['approve-pembayaran', 'id' => $model->id], ['class' => 'btn btn-success btn-sm']);
                     } else if ($model->status === 'Approve') {
                         return 'Approve';
                     } else {
