@@ -59,7 +59,12 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                // ['class' => 'yii\rest\UrlRule', 'controller' => 'transaksi'],
+                // [
+                //     // 'class' => 'yii\rest\UrlRule', 'controller' => 'transaksi',
+                //     // 'extraPatterns' => [
+                //     //     'PATCH pembayaran/' => 'pembayaran',
+                //     // ]
+                // ],
             ],
         ],
        
