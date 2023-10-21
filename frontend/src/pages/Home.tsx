@@ -33,10 +33,10 @@ const Home: React.FC = () => {
                 </h1>
               </div>
               <div className="w-full mt-2 ">
-                <h1 className="font-poppins-medium  text-7xl ">
+                <h1 className="font-poppins-medium text-5xl md:text-7xl mb-4">
                   Made Perfect{" "}
                 </h1>
-                <h1 className="font-poppins-medium  text-7xl ">
+                <h1 className="font-poppins-medium text-5xl md:text-7xl">
                   Your Dream Wedding{" "}
                 </h1>
               </div>
@@ -45,12 +45,15 @@ const Home: React.FC = () => {
         </div>
       </div>
       <div className="container mx-auto mt-24">
-        <div className="flex gap-10">
-          <img src="/assets/img/about.png" alt="about" />
-
+        <div className="flex flex-col md:flex-row gap-10 px-10 sm:px-0">
+          <img
+            src="/assets/img/about.png"
+            alt="about"
+            className="md:w-2/4 lg:w-full"
+          />
           <div className="flex flex-col justify-center">
-            <h1 className="text-[56px]">Tentang Kami</h1>
-            <h3 className="text-4xl">
+            <h1 className="text-5xl lg:text-[56px] mb-2">Tentang Kami</h1>
+            <h3 className="text-3xl lg:text-4xl">
               We are a team of passionate and experienced wedding planners
             </h3>
             <h6 className="text-base mt-4">
@@ -61,13 +64,13 @@ const Home: React.FC = () => {
               friendly, and professional, and we strive to make the planning
               process as stress-free as possible.
             </h6>
-            <button className="border border-black w-1/4 rounded-full p-2 mt-4 ">
+            <button className="border border-black w-2/4 xl:w-1/4 rounded-full p-2 mt-4 ">
               Pesan Sekarang
             </button>
           </div>
         </div>
       </div>
-      <div className="container mx-auto mt-32">
+      <div className="container mx-auto mt-32 px-6 md:px-0">
         <h1 className="text-center text-4xl">Layanan Kami</h1>
         <div className=" mt-10 grid grid-cols-1 gap-6 md:grid-cols-2  sm:w-auto ">
           <div className="rounded-xl bg-white p-10  flex flex-col gap-2 items-start shadow-xl border border-[#f5f5f5]">
@@ -135,7 +138,7 @@ const Home: React.FC = () => {
 
       <div className="container mx-auto mt-32">
         <h1 className="text-center text-4xl">Benefit</h1>
-        <div className=" mt-4 grid grid-cols-1 gap-6 md:grid-cols-4  sm:w-auto ">
+        <div className=" mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4  sm:w-auto ">
           <div className="rounded-xl bg-white p-10  flex flex-col gap-2 items-start ">
             <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-black text-[32px] text-white">
               <FaMoneyBillAlt />
@@ -190,11 +193,11 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto mt-24">
+      <div className="container mx-auto mt-24 px-6 md:px-0">
         <h1 className="text-center text-4xl">Paket Wedding</h1>
-        <div className=" py-10 grid grid-cols-1 gap-10 md:grid-cols-4  sm:w-auto ">
+        <div className="py-10 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4  w-full ">
           {paket?.map((list, index) => (
-            <div className="max-w-sm rounded overflow-hidden shadow-lg ">
+            <div className="rounded overflow-hidden shadow-lg h-[45vh] w-full">
               <img
                 className="w-full h-2/4 object-cover"
                 src={
@@ -278,7 +281,7 @@ const Home: React.FC = () => {
               />
             </div>
           </div>
-          <div className="grid gap-4">
+          <div className="md:grid gap-4 hidden ">
             <div>
               <img
                 className="h-auto max-w-full rounded-lg"
