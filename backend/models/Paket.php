@@ -12,11 +12,14 @@ use Yii;
  * @property string $kategori
  * @property string $nama
  * @property int $harga
+ * @property string $gambar
  * @property string|null $dekorasi
  * @property string|null $makeup_dan_busana
  * @property string|null $upacara_dan_tenda
  * @property string|null $dokumentasi
  * @property string|null $entertainment
+ * @property string|null $updateAt
+ * @property string|null $deleteAt
  *
  * @property Hotel $hotel
  * @property Transaksi[] $transaksis
@@ -40,7 +43,8 @@ class Paket extends \yii\db\ActiveRecord
             [['hotel_id', 'harga'], 'integer'],
             [['kategori', 'nama', 'harga'], 'required'],
             [['kategori', 'dekorasi', 'makeup_dan_busana', 'upacara_dan_tenda', 'dokumentasi', 'entertainment'], 'string'],
-            [['nama'], 'string', 'max' => 255],
+            [['updateAt', 'deleteAt'], 'safe'],
+            [['nama', 'gambar'], 'string', 'max' => 255],
             [['hotel_id'], 'exist', 'skipOnError' => true, 'targetClass' => Hotel::class, 'targetAttribute' => ['hotel_id' => 'id']],
         ];
     }
@@ -56,11 +60,14 @@ class Paket extends \yii\db\ActiveRecord
             'kategori' => 'Kategori',
             'nama' => 'Nama',
             'harga' => 'Harga',
+            'gambar' => 'Gambar',
             'dekorasi' => 'Dekorasi',
             'makeup_dan_busana' => 'Makeup Dan Busana',
             'upacara_dan_tenda' => 'Upacara Dan Tenda',
             'dokumentasi' => 'Dokumentasi',
             'entertainment' => 'Entertainment',
+            'updateAt' => 'Update At',
+            'deleteAt' => 'Delete At',
         ];
     }
 

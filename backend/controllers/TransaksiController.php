@@ -86,7 +86,7 @@ class TransaksiController extends Controller
             // NodeLogger::sendLog(['gambar' => $model->gambar]);
 
             if ($model->validate()) {
-                $saveTo = '../uploads/image/' . $url_gambar->baseName . '.' . $url_gambar->extension;
+                $saveTo = '../uploads/image/bukti/' . $url_gambar->baseName . '.' . $url_gambar->extension;
 
                 if ($url_gambar->saveAs($saveTo)) {
                     // $model->upload_by = Yii::$app->user->identity->username;
@@ -126,7 +126,7 @@ class TransaksiController extends Controller
             // NodeLogger::sendLog(['gambar' => $model->gambar != null]);
 
             if ($model->bukti_pembayaran != null) {
-               $saveTo = '../uploads/image/' . $url_gambar->baseName . '.' . $url_gambar->extension;
+               $saveTo = '../uploads/image/bukti/' . $url_gambar->baseName . '.' . $url_gambar->extension;
                $url_gambar->saveAs($saveTo);
                     $model->save();
                     return $this->redirect(['view', 'id' => $model->id]);
