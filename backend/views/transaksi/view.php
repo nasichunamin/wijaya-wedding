@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'gambar',
                 'format' => 'html',
                 'value' => function ($data) {
-                    return Html::img('../../uploads/image/' . $data['bukti_pembayaran']);
+                    return Html::img('../../uploads/image/bukti/' . $data['bukti_pembayaran']);
                 },
 
             ],
