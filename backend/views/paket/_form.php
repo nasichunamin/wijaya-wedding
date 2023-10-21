@@ -18,14 +18,15 @@ $hotel = ArrayHelper::map(Hotel::find()->all(), "id", "nama");
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'kategori')->dropDownList([ 'rumahan' => 'Rumahan', 'hotel' => 'Hotel', ], ['prompt' => 'Pilih Kategori', 'id' => 'kategori-dropdown']) ?>
-    <div class="hotel-id-dropdown" style="display: none;">
-    <?= $form->field($model, 'hotel_id')->dropDownList($hotel, ['prompt' => 'Pilih Hotel', 'id' => 'hotel-id-dropdown'])->label('Pilih Hotel')  ?>
+    <div class="hotel-id-dropdown" style="<?php if($model->kategori == 'hotel') echo "display: block;"; else echo "display: none;"; ?>">
+    <?= $form->field($model, 'hotel_id')->dropDownList($hotel, ['prompt' => 'Pilih Hotel', 'id' => 'hotel-id-choice'])->label('Pilih Hotel')  ?>
     </div>
     
 
     
 
     <?= $form->field($model, 'harga')->textInput() ?>
+    <?= $form->field($model, 'gambar')->fileInput() ?>
 
     <?= $form->field($model, 'dekorasi')->textarea(['rows' => 6]) ?>
 
@@ -54,6 +55,7 @@ $script = <<< JS
         var selectedKategori = $(this).val();
         if (selectedKategori === 'hotel') {
             $('.hotel-id-dropdown').show();
+            $('#hotel-id-choice').val("");
             $('.rumahan-dropdown').hide();
         } else {
             $('.hotel-id-dropdown').hide();
