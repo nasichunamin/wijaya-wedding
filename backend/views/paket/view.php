@@ -32,6 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'kategori',
             'nama',
             'harga',
+            [
+                'attribute' => 'gambar',
+                'format' => 'html',
+                'value' => function ($data) {
+                    return Html::img('../../uploads/image/paket/' . $data['gambar']);
+                },
+
+            ],
             'dekorasi:ntext',
             'makeup_dan_busana:ntext',
             'upacara_dan_tenda:ntext',
