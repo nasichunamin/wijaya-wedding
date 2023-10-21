@@ -4,9 +4,11 @@ namespace app\controllers;
 
 use app\models\Paket;
 use app\models\PaketSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * PaketController implements the CRUD actions for Paket model.
@@ -69,12 +71,29 @@ class PaketController extends Controller
     {
         $model = new Paket();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $url_gambar = UploadedFile::getInstance($model, 'gambar');
+            $model->gambar = $url_gambar->name;
+
+            // NodeLogger::sendLog(['gambar' => $model->gambar]);
+
+            if ($model->validate()) {
+                $saveTo = '../uploads/image/paket/' . $url_gambar->baseName . '.' . $url_gambar->extension;
+
+                if ($url_gambar->saveAs($saveTo)) {
+                    // $model->upload_by = Yii::$app->user->identity->username;
+                    // $model->tgl_upload = date('Y-m-d H:i:s');
+                    $model->save();
+
+
+                    yii::$app->session->setFlash('success', 'Data berhasil diupload');
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                echo "gagal";
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -92,14 +111,30 @@ class PaketController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $request = Yii::$app->request->post();
+        $get = Paket::find()->where(['id' => $id])->one();
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        if ($model->load(Yii::$app->request->post())) {
+           
+            $url_gambar = UploadedFile::getInstance($model, 'gambar');
 
+            // NodeLogger::sendLog(['gambar' => $model->gambar != null]);
+
+            if ($url_gambar != null) {
+                $model->gambar = $url_gambar->name;
+               $saveTo = '../uploads/image/paket/' . $url_gambar->baseName . '.' . $url_gambar->extension;
+               $url_gambar->saveAs($saveTo);
+                    $model->save();
+                    return $this->redirect(['view', 'id' => $model->id]);
+            }
+            $model->gambar = $get->gambar;
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id]); 
+        }else{
         return $this->render('update', [
             'model' => $model,
         ]);
+        }
     }
 
     /**

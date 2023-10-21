@@ -21,7 +21,7 @@ class RestController extends Controller
             'class' => \yii\filters\Cors::className(),
             'cors'  => [
                 // restrict access to domains:
-                'Origin' => ['*'],
+                'Origin' => ['http://localhost:3000'],
 
                 // Allow only POST and PUT methods
                 'Access-Control-Request-Method' => ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
