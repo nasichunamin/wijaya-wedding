@@ -1,14 +1,16 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
-import Layout from './components/Layout/Layout';
-import Home from './pages/Home';
-import Contact from './pages/Contact';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Layout from "./components/Layout/Layout";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import Login from "./pages/Auth/Login";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/login" element={<Login />}></Route>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/Kontak" element={<Contact />} />
