@@ -225,10 +225,11 @@ const Home: React.FC = () => {
           ))}
         </div>
         <div className="w-full  flex justify-center mt-4">
-          <button className="btn bg-yellow-600 py-3 px-5 text-white font-bold rounded-full">
-            {" "}
-            Paket Lainnya{" "}
-          </button>
+          <a href="/Produk">
+            <button className="btn bg-yellow-600 py-3 px-5 text-white font-bold rounded-full">
+              Paket Lainnya
+            </button>
+          </a>
         </div>
       </div>
       <div className="container mx-auto mt-24">
