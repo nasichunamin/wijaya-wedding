@@ -48,7 +48,9 @@ export default function Login() {
             <div className="my-4 w-full">
               <div>
                 <span>Tidak Punya Akun ? </span>
-                <a href="/register">Silahkan Daftar</a>
+                <a href="/register" className="text-[#e8bd22] font-bold">
+                  Silahkan Daftar
+                </a>
               </div>
               <button
                 type="button"

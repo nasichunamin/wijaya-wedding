@@ -5,12 +5,14 @@ import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/Kontak" element={<Contact />} />
