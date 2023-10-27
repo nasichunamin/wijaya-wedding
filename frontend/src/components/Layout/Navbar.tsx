@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { storageService } from "../../services";
 
 export function Navbar() {
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
+  const [showProfile, setShowProfile] = useState<boolean>(false);
+  const [token, setToken] = useState<String>("");
+
   //   const [colorChange, setColorchange] = useState(false);
   //   const changeNavbarColor = () => {
   //     if (window.scrollY >= 5) {
@@ -15,6 +19,13 @@ export function Navbar() {
   //   useEffect(() => {
   //     window.addEventListener('scroll', changeNavbarColor);
   //   });
+  useEffect(() => {
+    const user = storageService.getToken();
+    setToken(user ? user : "");
+
+    // console.log({ user });
+    // console.log({ paket });
+  }, [token]);
   return (
     <nav
       className={` bg-[#ffffff]
@@ -151,15 +162,78 @@ export function Navbar() {
                 Home
               </a>
             </li> */}
-
-            <li>
-              <a
-                href="/login"
-                className="mt-2 block rounded-full border border-black py-1 text-center font-poppins-bold text-base text-black md:mt-1 md:py-2.5 md:px-5 hover:text-black hover:no-underline hover:bg-[#e8bd22] hover:border-[#e8bd22]"
-              >
-                Masuk
-              </a>
-            </li>
+            {token === "" ? (
+              <li>
+                <a
+                  href="/login"
+                  className="mt-2 block rounded-full border border-black py-1 text-center font-poppins-bold text-base text-black md:mt-1 md:py-2.5 md:px-5 hover:text-black hover:no-underline hover:bg-[#e8bd22] hover:border-[#e8bd22]"
+                >
+                  Masuk
+                </a>
+              </li>
+            ) : (
+              <li className="relative ml-3">
+                <div>
+                  <button
+                    type="button"
+                    className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    id="user-menu-button"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    onClick={() =>
+                      showProfile === false
+                        ? setShowProfile(true)
+                        : setShowProfile(false)
+                    }
+                  >
+                    <span className="absolute -inset-1.5"></span>
+                    <span className="sr-only">Open user menu</span>
+                    <img
+                      className="h-8 w-8 rounded-full"
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt=""
+                    />
+                  </button>
+                </div>
+                {showProfile ? (
+                  <div
+                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="user-menu-button"
+                    // tabIndex="-1"
+                  >
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700"
+                      role="menuitem"
+                      // tabIndex="-1"
+                      id="user-menu-item-0"
+                    >
+                      Your Profile
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700"
+                      role="menuitem"
+                      // tabIndex="-1"
+                      id="user-menu-item-1"
+                    >
+                      Settings
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700"
+                      role="menuitem"
+                      // tabIndex="-1"
+                      id="user-menu-item-2"
+                    >
+                      Sign out
+                    </a>
+                  </div>
+                ) : null}
+              </li>
+            )}
           </ul>
         </div>
       </div>
