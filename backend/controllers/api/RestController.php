@@ -70,13 +70,23 @@ class RestController extends Controller
     public function getAuthUser()
     {
         $headers = Yii::$app->request->headers;
-        $tokenStr = $headers["Authorization"];
+        $tokenStr = $headers["Token"];
         /** @var UserAuth $token */
         $token = UserAuth::find()->where(["token" => $tokenStr])->one();
         if ($token) {
-            return $token->user;
+            return $token->account;
         }
 
-        return null;
+        return $this->error("Not authenticated", 500);
+
+    }
+
+    public function error($message, $code){
+        Yii::$app->response->setStatusCode($code);
+
+        return [
+            "code" => $code,
+            "message" => $message,
+        ];
     }
 }
