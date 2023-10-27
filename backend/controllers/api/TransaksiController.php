@@ -17,6 +17,10 @@ class TransaksiController extends RestController
 
     public function actionList()
     {
+        $currentUser = $this->getAuthUser();
+        if (isset($currentUser['code']) && $currentUser['code'] == 500) {
+            return $currentUser;
+        }
         return $this->output(Transaksi::find()->all());
     }
 
@@ -24,7 +28,10 @@ class TransaksiController extends RestController
     {
         $model = new Transaksi;
         $body = $this->getRawBody();
-
+        $currentUser = $this->getAuthUser();
+        if (isset($currentUser['code']) && $currentUser['code'] == 500) {
+            return $currentUser;
+        }
         $model->account_id = $body['account_id'];
         $model->paket_id = $body['paket_id'];
         $model->tgl_pemesanan = $body['tgl_pemesanan'];
@@ -42,18 +49,19 @@ class TransaksiController extends RestController
         $request = Yii::$app->request;
         $transaksi = Transaksi::findOne($id);
 
+        $currentUser = $this->getAuthUser();
+        if (isset($currentUser['code']) && $currentUser['code'] == 500) {
+            return $currentUser;
+        }
          if ($request) {
 
            
             $url_gambar = UploadedFile::getInstanceByName('bukti_pembayaran');
-            // $transaksi->bukti_pembayaran = $url_gambar->name;
-            // return $this->output(['data' => $url_gambar], 200);
-            // NodeLogger::sendLog(['gambar' => $model->gambar]);
+            
 
             if ($url_gambar) {
                 $saveTo = '../uploads/image/' . $url_gambar->name ;
-                // $saveTo = '../uploads/image/' . $url_gambar . '.jpg';
-                // return $this->output($url_gambar->name);
+               
 
 
                 if ($url_gambar->saveAs($saveTo)) {
@@ -63,24 +71,6 @@ class TransaksiController extends RestController
                     $transaksi->save();
 
                     return $this->output($transaksi);
-
-
-
-
-                    // $model->account_id = $body['account_id'];
-                    // $model->paket_id = $body['paket_id'];
-                    // $model->tgl_pemesanan = $body['tgl_pemesanan'];
-                    // $model->status = $body['status'];
-                    // $model->alamat_pemesanan = $body['alamat_pemesanan'];
-                    
-                    // $model->account_id = $body['account_id'];
-                    // $model->paket_id = $body['paket_id'];
-                    // $model->tgl_pemesanan = $body['tgl_pemesanan'];
-                    // $model->status = $body['status'];
-                    // $model->alamat_pemesanan = $body['alamat_pemesanan'];
-                    // $model->upload_by = Yii::$app->user->identity->username;
-                    // $model->tgl_upload = date('Y-m-d H:i:s');
-                    
 
                 }
             } 
