@@ -5,11 +5,12 @@ import { Paket } from "../types";
 import { convertRupiahs } from "../components/ConvertRupiah/indexConverRupiah";
 
 const Home: React.FC = () => {
-  const [paket, setPaket] = useState<Array<Paket>>();
+  const [paket, setPaket] = useState<Array<Paket>>([]);
   const getPaket = async () => {
     try {
       const response = await paketService.location();
-      setPaket(response?.data?.data);
+      // console.log("response", response?.data);
+      setPaket(response?.data);
       // response?.data.map((paket: any) => console.log(paket?.data));
       // console.log("response", response.data.data);
       // console.log(response.data.username)
@@ -20,6 +21,7 @@ const Home: React.FC = () => {
   };
   useEffect(() => {
     getPaket();
+    // console.log({ paket });
   });
   return (
     <>
@@ -225,7 +227,7 @@ const Home: React.FC = () => {
           ))}
         </div>
         <div className="w-full  flex justify-center mt-4">
-          <a href="/Produk">
+          <a href="/Paket">
             <button className="btn bg-yellow-600 py-3 px-5 text-white font-bold rounded-full">
               Paket Lainnya
             </button>
