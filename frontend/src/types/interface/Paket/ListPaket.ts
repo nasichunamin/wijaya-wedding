@@ -1,6 +1,6 @@
 export interface ResponsePaket {
   message: string;
-  data: Paket[];
+  data: Paket;
 }
 
 export interface Paket {
