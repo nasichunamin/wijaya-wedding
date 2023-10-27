@@ -1,4 +1,75 @@
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { LoginRequest } from "../../types";
+import { authService, storageService } from "../../services";
+
 export default function Login() {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const login = () => {
+    console.log({ username });
+    console.log({ password });
+
+    if (username === "") {
+      toast.error("Masukkan Username dulu");
+    } else if (password === "") {
+      toast.error("Masukkan Password dulu");
+    } else {
+      // setIsLoadingScreen(true);
+
+      const request: LoginRequest = {
+        username: username,
+        password: password,
+      };
+      authService
+        .login(request)
+        .then((resp) => {
+          console.log("resp", resp);
+          const response = resp.data;
+          storageService.setToken(resp.data.data.token);
+          // dispatch(setUser(resp.data));
+          if (response) {
+            // var tes: any = setTimeout(
+            //   function () {
+            //     <Loading size={60} />;
+            //   }.bind(Loading),
+            //   2000
+            // );
+            // if (tes) {
+            if (response.data.role === "customer") {
+              // navigation("/admin");
+              // setIsLoadingScreen(false);
+              document.location.href = "/";
+            } else {
+              // const close = setIsLoadingScreen(false);
+              // if (() => close) {
+              toast.error("Data tidak ditemukan");
+              document.location.href = `/login`;
+
+              // toast.
+              // }
+            }
+            // }
+          }
+        })
+        .catch((error) => {
+          // let erorLogin =
+          if (error) {
+            // setIsLoadingScreen(false);
+            // const close = setIsLoadingScreen(false);
+            // if (() => close) {
+            document.location.href = `/login`;
+
+            toast.error(error.response.data);
+            // toast.
+            // }
+            // location.href = "/";
+          }
+        });
+    }
+  };
+
   return (
     <div className="flex flex-row justify-center h-screen w-screen">
       <div className="flex flex-col  md:px-[114px]">
@@ -32,7 +103,7 @@ export default function Login() {
               name="username"
               id="username"
               // value={username}
-              // onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <span>Password</span>
             <input
@@ -43,7 +114,7 @@ export default function Login() {
               name="password"
               id="password"
               // value={password}
-              // onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div className="my-4 w-full">
               <div>
@@ -59,7 +130,7 @@ export default function Login() {
                 //   size="large"
                 //   rounded="rounded"
                 className="mt-3 w-full font-poppins-bold text-[16px] bg-[#e8bd22] rounded py-2"
-                // onClick={() => login()}
+                onClick={() => login()}
               >
                 <span className="text-white font-bold">Masuk</span>
               </button>
