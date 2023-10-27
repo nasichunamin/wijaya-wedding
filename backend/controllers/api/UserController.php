@@ -81,12 +81,21 @@ class UserController extends RestController
     public function actionUpdate($id)
     {
         $body = $this->getRawBody();
-
+        $currentUser = $this->getAuthUser();
+        if (isset($currentUser['code']) && $currentUser['code'] == 500) {
+            return $currentUser;
+        }
         $model = $this->findModel($id);
-        $model->name = $body['name'];
         $model->username = $body['username'];
+        $model->password = md5($body['password']);
+        $model->role = $body['role'];
+        $model->nama_lengkap = $body['nama_lengkap'];
+        $model->jenis_kelamin = $body['jenis_kelamin'];
+        $model->tgl_lahir = $body['tgl_lahir'];
+        $model->no_telepon = $body['no_telepon'];
+        $model->updatedAt = date('Y-m-d H:i:s');
         if ($model->save()) {
-            return $this->output(['data' => 'oke']);
+            return $this->output(['message' => 'berhasil update', 'data' => $model]);
         }
         return $this->output([
             "error" => "id not found",
