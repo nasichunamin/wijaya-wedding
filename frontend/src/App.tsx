@@ -9,23 +9,30 @@ import Register from "./pages/Auth/Register";
 import Product from "./pages/Product";
 import History from "./pages/Transaksi/History";
 import { Toaster } from "react-hot-toast";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./store";
 
 function App() {
   return (
     <>
-      <Toaster position="top-center" reverseOrder={true} />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/Kontak" element={<Contact />} />
-            <Route path="/Paket" element={<Product />} />
-            <Route path="/History" element={<History />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Toaster position="top-center" reverseOrder={true} />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
+              <Route path="/" element={<Layout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/Kontak" element={<Contact />} />
+                <Route path="/Paket" element={<Product />} />
+                <Route path="/History" element={<History />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
     </>
     // <div className="App">
     //   <header className="App-header">
