@@ -2,10 +2,13 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { LoginRequest } from "../../types";
 import { authService, storageService } from "../../services";
+import { setUser } from "../../store/actions";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const dispatch: any = useDispatch();
 
   const login = () => {
     console.log({ username });
@@ -28,7 +31,7 @@ export default function Login() {
           console.log("resp", resp);
           const response = resp.data;
           storageService.setToken(resp.data.data.token);
-          // dispatch(setUser(resp.data));
+          dispatch(setUser(resp.data.data));
           if (response) {
             // var tes: any = setTimeout(
             //   function () {
