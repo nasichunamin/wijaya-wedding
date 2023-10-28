@@ -1,12 +1,23 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { storageService } from "../../services";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../store/actions";
+import { BsFillCaretDownFill } from "react-icons/bs";
 export function Navbar() {
   const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
   const [showProfile, setShowProfile] = useState<boolean>(false);
   const [token, setToken] = useState<String>("");
+  const profilUser = useSelector((state: any) => state.user);
+  const dispatch: any = useDispatch();
 
+  const logout = () => {
+    storageService.removeToken();
+    dispatch(setUser(null));
+
+    window.location.reload();
+  };
   //   const [colorChange, setColorchange] = useState(false);
   //   const changeNavbarColor = () => {
   //     if (window.scrollY >= 5) {
@@ -23,9 +34,11 @@ export function Navbar() {
     const user = storageService.getToken();
     setToken(user ? user : "");
 
+    console.log({ profilUser });
+
     // console.log({ user });
     // console.log({ paket });
-  }, [token]);
+  }, [token, profilUser]);
   return (
     <nav
       className={` bg-[#ffffff]
@@ -176,7 +189,7 @@ export function Navbar() {
                 <div>
                   <button
                     type="button"
-                    className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="relative flex rounded-full  text-sm  capitalize"
                     id="user-menu-button"
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -188,11 +201,15 @@ export function Navbar() {
                   >
                     <span className="absolute -inset-1.5"></span>
                     <span className="sr-only">Open user menu</span>
-                    <img
+                    <div className="flex items-center gap-2">
+                      {profilUser.username}
+                      <BsFillCaretDownFill />
+                    </div>
+                    {/* <img
                       className="h-8 w-8 rounded-full"
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       alt=""
-                    />
+                    /> */}
                   </button>
                 </div>
                 {showProfile ? (
@@ -204,32 +221,33 @@ export function Navbar() {
                     // tabIndex="-1"
                   >
                     <a
-                      href="#"
+                      href="profil"
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
                       // tabIndex="-1"
                       id="user-menu-item-0"
                     >
-                      Your Profile
+                      Profile
                     </a>
                     <a
-                      href="#"
+                      href="riwayat-transaksi"
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
                       // tabIndex="-1"
                       id="user-menu-item-1"
                     >
-                      Settings
+                      Riwayat Transaksi
                     </a>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700"
-                      role="menuitem"
+                    <button
+                      // href=""
+                      className="block px-4 py-2 text-sm text-gray-700  w-full text-left"
+                      // role="menuitem"
                       // tabIndex="-1"
                       id="user-menu-item-2"
+                      onClick={() => logout()}
                     >
-                      Sign out
-                    </a>
+                      Logout
+                    </button>
                   </div>
                 ) : null}
               </li>
