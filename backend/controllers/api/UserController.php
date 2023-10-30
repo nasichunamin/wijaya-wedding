@@ -114,6 +114,16 @@ class UserController extends RestController
         }
     }
 
+    public function actionView($id)
+    {
+        $id = $this->findModel($id);
+        $user = $this->getAuthUser();
+        if ($user) {
+           
+            return $this->output($id);
+        }
+    }
+
     protected function findModel($id)
     {
         if (($model = User::findOne(['id' => $id])) !== null) {
