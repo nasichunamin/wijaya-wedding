@@ -12,11 +12,17 @@ main.interceptors.request.use(
   function (config: AxiosRequestConfig) {
     // Do something before request is sent
     const userToken = storageService.getToken() || "";
+    // const head = {
+    //   Token: userToken,
+    // };
     config.headers = {
-      //   Authorization: userToken,
-      // 'Access-Control-Allow-Credentials' : 'true',
-      // 'Access-Control-Allow-Origin': '*',
-      // 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+      // Accept: "application/json",
+      // "Content-Type": "application/json",
+      Token: userToken,
+      // userToken,
+      // "Access-Control-Allow-Credentials": "true",
+      // "Access-Control-Allow-Origin": "*",
+      // "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     };
 
     return config;

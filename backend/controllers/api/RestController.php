@@ -13,26 +13,52 @@ use yii\rest\Controller;
 class RestController extends Controller
 {
     public $enableCsrfValidation = false;
+
+    public static function allowedDomains(){
+        return [
+            // '*'
+            'http://localhost:3000', 'https://localhost:3000', 'http://127.0.0.1:3000', 'https://127.0.0.1:3000'
+        ];
+    }
+
     public function behaviors()
     {
+        // return array_merge(parent::behaviors(), [
+        //     'corsFilter' => [
+        //         'class' => \yii\filters\Cors::className(),
+        //         'cors' => [
+        //             'Origin' => static.allowedDomains(),
+        //             // 'Access-Control-Request-Method' => ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+        //             'Access-Control-Request-Method' => ['POST'],
+        //             // 'Access-Control-Request-Headers' => ['content-type'],
+        //             'Access-Control-Allow-Credentials' => true,
+        //             'Access-Control-Max-Age' => 3600,
+        //         ]
+        //     ]
+        // ])
         $behaviors = parent::behaviors();
         // For cross-domain AJAX request
         $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),
             'cors'  => [
                 // restrict access to domains:
-                'Origin' => ['http://localhost:3000'],
+                'Origin' => [
+                    'http://localhost:3000', 
+                    'https://localhost:3000', 
+                    'http://127.0.0.1:3000', 
+                    'https://127.0.0.1:3000'
+                ],
 
                 // Allow only POST and PUT methods
                 'Access-Control-Request-Method' => ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
                 // Allow only headers 'X-Wsse'
-                'Access-Control-Request-Headers' => ['content-type'],
+                'Access-Control-Request-Headers' => ['content-type', 'Token'],
                 // Allow credentials (cookies, authorization headers, etc.) to be exposed to the browser
-                // 'Access-Control-Allow-Credentials' => true,
+                'Access-Control-Allow-Credentials' => true,
                 // Allow OPTIONS caching
-                // 'Access-Control-Max-Age' => 3600,
+                // 'Access-Control-Max-Age' => 86400,
                 // Allow the X-Pagination-Current-Page header to be exposed to the browser.
-                'Access-Control-Expose-Headers' => ['*'],            // Cache (seconds)
+                // 'Access-Control-Expose-Headers' => ['*'],            // Cache (seconds)
             ],
         ];
 
@@ -84,7 +110,7 @@ class RestController extends Controller
     public function error($message, $code){
         Yii::$app->response->setStatusCode($code);
 
-        return [
+        return [ 
             "code" => $code,
             "message" => $message,
         ];

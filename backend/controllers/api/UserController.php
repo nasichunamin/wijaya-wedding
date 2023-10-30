@@ -117,11 +117,12 @@ class UserController extends RestController
     public function actionView($id)
     {
         $id = $this->findModel($id);
-        $user = $this->getAuthUser();
-        if ($user) {
+        $currentUser = $this->getAuthUser();
+        if (isset($currentUser['code']) && $currentUser['code'] == 500) {
+            return $currentUser;
+        }
            
             return $this->output($id);
-        }
     }
 
     protected function findModel($id)

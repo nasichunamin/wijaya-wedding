@@ -5,10 +5,10 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   message: string;
-  data: Data;
+  data: User;
 }
 
-export interface Data {
+export interface User {
   id: number;
   username: string;
   password: string;
