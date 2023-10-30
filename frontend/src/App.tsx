@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store";
+import Profile from "./pages/Auth/Profile";
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/Kontak" element={<Contact />} />
                 <Route path="/Paket" element={<Product />} />
-                <Route path="/History" element={<History />} />
+                <Route path="/Riwayat-Transaksi" element={<History />} />
+                <Route path="/Profile" element={<Profile />} />
               </Route>
             </Routes>
           </BrowserRouter>
