@@ -86,13 +86,13 @@ class UserController extends RestController
             return $currentUser;
         }
         $model = $this->findModel($id);
-        $model->username = $body['username'];
-        $model->password = md5($body['password']);
-        $model->role = $body['role'];
-        $model->nama_lengkap = $body['nama_lengkap'];
-        $model->jenis_kelamin = $body['jenis_kelamin'];
-        $model->tgl_lahir = $body['tgl_lahir'];
-        $model->no_telepon = $body['no_telepon'];
+        $model->username = isset($body['username']) ?  $body['username'] :$model->username;
+        $model->password = isset($body['password']) ?  md5($body['password']) :$model->password;
+        $model->role = isset($body['role']) ?  $body['role'] :$model->role;
+        $model->nama_lengkap = isset($body['nama_lengkap']) ?  $body['nama_lengkap'] :$model->nama_lengkap;
+        $model->jenis_kelamin = isset($body['jenis_kelamin']) ?  $body['jenis_kelamin'] :$model->jenis_kelamin;
+        $model->tgl_lahir = isset($body['tgl_lahir']) ?  $body['tgl_lahir'] :$model->tgl_lahir;
+        $model->no_telepon = isset($body['no_telepon']) ?  $body['no_telepon'] :$model->no_telepon;
         $model->updatedAt = date('Y-m-d H:i:s');
         if ($model->save()) {
             return $this->output(['message' => 'berhasil update', 'data' => $model]);
