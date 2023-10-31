@@ -13,10 +13,11 @@ export function Navbar() {
   const dispatch: any = useDispatch();
 
   const logout = () => {
-    storageService.removeToken();
     dispatch(setUser(null));
 
-    window.location.reload();
+    storageService.removeToken();
+
+    document.location.href = "/";
   };
   //   const [colorChange, setColorchange] = useState(false);
   //   const changeNavbarColor = () => {
@@ -34,7 +35,7 @@ export function Navbar() {
     const user = storageService.getToken();
     setToken(user ? user : "");
 
-    console.log({ profilUser });
+    // console.log({ profilUser });
 
     // console.log({ user });
     // console.log({ paket });
@@ -202,7 +203,7 @@ export function Navbar() {
                     <span className="absolute -inset-1.5"></span>
                     <span className="sr-only">Open user menu</span>
                     <div className="flex items-center gap-2">
-                      {profilUser.username}
+                      {profilUser?.username}
                       <BsFillCaretDownFill />
                     </div>
                     {/* <img
