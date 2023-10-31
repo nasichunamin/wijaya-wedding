@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Paket } from "../../types";
-import { paketService } from "../../services";
+import { Paket, TransaksiRequest } from "../../types";
+import { paketService, transaksiService } from "../../services";
 import { convertRupiahs } from "../../components/ConvertRupiah/indexConverRupiah";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const CreateTransaksi: React.FC = () => {
   const [paket, setPaket] = useState<Paket>();
@@ -12,6 +14,9 @@ const CreateTransaksi: React.FC = () => {
   const [upacaraDanTenda, setUpacaraDanTenda] = useState<Array<any>>();
   const [dokumentasi, setDokumentasi] = useState<Array<any>>();
   const [entertainment, setEntertainment] = useState<Array<any>>();
+  const profilUser = useSelector((state: any) => state.user);
+  const [tanggalPemesanan, setTanggalPemesanan] = useState<string>("");
+  const [alamatPemesanan, setAlamatPemesanan] = useState<string>("");
 
   //   console.log(params.idPaket);
   const getPaket = async () => {
@@ -50,6 +55,35 @@ const CreateTransaksi: React.FC = () => {
     } catch (error) {
       console.log("error", error);
     }
+  };
+
+  const createPesanan = async () => {
+    try {
+      if (tanggalPemesanan === "") {
+        toast.error("Silahkan Tentukan Tanggal Pemesanan");
+      } else if (alamatPemesanan === "") {
+        toast.error("Silahkan Tentukan Alamat Pemesanan");
+      } else {
+        const request: TransaksiRequest = {
+          account_id: String(profilUser?.id),
+          paket_id: String(params?.idPaket),
+          tgl_pemesanan: tanggalPemesanan,
+          alamat_pemesanan: alamatPemesanan,
+        };
+
+        // console.log("request", request);
+
+        const response = await transaksiService.create(request);
+        if (response) {
+          toast.success(
+            "Selamat Pesanan Anda Berhasil Dibuat, Tunggu Admin Untuk Mengkonfirmasi"
+          );
+          setTimeout(function () {
+            document.location.href = "/Riwayat-Transaksi";
+          }, 1000);
+        }
+      }
+    } catch (error) {}
   };
   useEffect(() => {
     getPaket();
@@ -127,11 +161,11 @@ const CreateTransaksi: React.FC = () => {
                     className={`my-2 w-full text-black font-poppins-regular border  border-[#e8bd22] rounded  py-1 `}
                     //   errorMessage={errors?.email?.message}
                     //   {...register("email", { required: "email is required" })}
-                    name="username"
-                    id="username"
+                    name="tanggalPemesanan"
+                    id="tanggalPemesanan"
                     // value={username}
                     // disabled={editMode ? false : true}
-                    // onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => setTanggalPemesanan(e.target.value)}
                   />
                 </div>
                 <div className="w-full ">
@@ -141,11 +175,11 @@ const CreateTransaksi: React.FC = () => {
                     className={`my-2 w-full text-black font-poppins-regular border  border-[#e8bd22] rounded  py-1 `}
                     //   errorMessage={errors?.email?.message}
                     //   {...register("email", { required: "email is required" })}
-                    name="username"
-                    id="username"
+                    name="alamatPemesanan"
+                    id="alamatPemesanan"
                     // value={username}
                     // disabled={editMode ? false : true}
-                    // onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => setAlamatPemesanan(e.target.value)}
                   />
                 </div>
                 <button
@@ -155,7 +189,7 @@ const CreateTransaksi: React.FC = () => {
                   //   size="large"
                   //   rounded="rounded"
                   className="  font-poppins-bold text-[16px] bg-[#e8bd22] rounded py-2"
-                  //   onClick={() => setEditMode(true)}
+                  onClick={() => createPesanan()}
                 >
                   <span className="text-white font-bold">Kirim</span>
                 </button>
