@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RegisterOrEditRequest, User } from "../../types";
-import { authService, storageService } from "../../services";
+import { authService } from "../../services";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 // }
 const Profile: React.FC = () => {
   const [user, setUser] = useState<User>();
-  const token = storageService.getToken();
   const profilUser = useSelector((state: any) => state.user);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");

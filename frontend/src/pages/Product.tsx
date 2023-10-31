@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { paketService } from "../services";
 import { Paket } from "../types";
 import { convertRupiahs } from "../components/ConvertRupiah/indexConverRupiah";
+import { Link } from "react-router-dom";
 
 const Product: React.FC = () => {
   const [paket, setPaket] = useState<Array<Paket>>();
@@ -238,8 +239,13 @@ const Product: React.FC = () => {
                       >
                         Lihat Detail
                       </button>
-                      <button className="btn bg-green-500 py-1 px-5 text-white font-bold rounded-md w-full ">
-                        Pesan Sekarang
+                      <button
+                        className="btn bg-green-500 py-1 px-5 text-white font-bold rounded-md w-full "
+                        // onClick={() =>
+                        //   (document.location.href = `/Pesan?id=${list?.id}`)
+                        // }
+                      >
+                        <Link to={`/Pesan/${list?.id}`}>Pesan Sekarang</Link>
                       </button>
                     </div>
                   </div>

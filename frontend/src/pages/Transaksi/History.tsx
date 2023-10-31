@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { FaMoneyBillAlt } from "react-icons/fa";
+import React, { useEffect } from "react";
 import { Table } from "flowbite-react";
 
 const History: React.FC = () => {

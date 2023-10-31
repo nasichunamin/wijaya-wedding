@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store";
 import Profile from "./pages/Auth/Profile";
+import CreateTransaksi from "./pages/Transaksi/CreateTransaksi";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/Paket" element={<Product />} />
                 <Route path="/Riwayat-Transaksi" element={<History />} />
                 <Route path="/Profile" element={<Profile />} />
+                <Route path="/Pesan/:idPaket" element={<CreateTransaksi />} />
               </Route>
             </Routes>
           </BrowserRouter>

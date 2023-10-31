@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 import api from "./api.service";
-import { Paket, ResponsePaket } from "../types";
+import { Paket } from "../types";
 
 // API GET DATA
 export const location = async (): Promise<AxiosResponse<Paket[]>> => {
@@ -9,6 +9,6 @@ export const location = async (): Promise<AxiosResponse<Paket[]>> => {
 };
 
 // API GET DETAIL DATA
-export const detail = async (id: number): Promise<AxiosResponse<Paket>> => {
+export const detail = async (id: any): Promise<AxiosResponse<Paket>> => {
   return await api.get("paket/detail?id=" + id);
 };
