@@ -1,7 +1,11 @@
 import { AxiosResponse } from "axios";
 
 import api from "./api.service";
-import { TransaksiRequest, TransaksiResponse } from "../types";
+import {
+  ListTransaksiResponse,
+  TransaksiRequest,
+  TransaksiResponse,
+} from "../types";
 
 // API GET DATA
 export const create = async (
@@ -10,9 +14,11 @@ export const create = async (
   return await api.post("transaksi/create", data);
 };
 
-// export const profile = async (id: string): Promise<AxiosResponse<User>> => {
-//   return await api.post("user/view?id=" + id);
-// };
+export const list = async (
+  id: any
+): Promise<AxiosResponse<ListTransaksiResponse>> => {
+  return await api.post("transaksi/list?id=" + id);
+};
 
 // export const update = async (
 //   data: RegisterOrEditRequest,
