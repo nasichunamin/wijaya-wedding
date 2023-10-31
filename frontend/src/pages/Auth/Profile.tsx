@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaMoneyBillAlt } from "react-icons/fa";
-import { Table } from "flowbite-react";
 import { RegisterOrEditRequest, User } from "../../types";
 import { authService, storageService } from "../../services";
 import { useSelector } from "react-redux";
@@ -55,16 +53,6 @@ const Profile: React.FC = () => {
   };
 
   const edit = async (id: any) => {
-    // console.log("id edit", typeof user?.id);
-    // console.log({
-    //   username,
-    //   password,
-    //   namaLengkap,
-    //   jenisKelamin,
-    //   tanggalLahir,
-    //   noHp,
-    // });
-
     try {
       const request: RegisterOrEditRequest = {
         username: username,
@@ -86,6 +74,25 @@ const Profile: React.FC = () => {
     } catch (error: any) {
       // toast.error(error);
       console.log("errorx", error);
+    }
+  };
+
+  const editPassword = async (id: any) => {
+    try {
+      const request: RegisterOrEditRequest = {
+        password: password,
+      };
+
+      console.log("request", request);
+      const response = await authService.update(request, id);
+
+      if (response) {
+        setEditPasswordMode(false);
+        setPassword("");
+        toast.success("Selamat, Anda berhasil mengubah password");
+      }
+    } catch (error: any) {
+      toast.error(error);
     }
   };
   useEffect(() => {
@@ -133,17 +140,29 @@ const Profile: React.FC = () => {
                     //   value={password}
                     //   onChange={(e) => setPassword(e.target.value)}
                   />
-                  <button
-                    type="button"
-                    //   isLoading={isSubmitting}
-                    //   shadow="small"
-                    //   size="large"
-                    //   rounded="rounded"
-                    className="w-2/4 font-poppins-bold text-[16px] bg-[#e8bd22] rounded py-1"
-                    onClick={() => setEditPasswordMode(true)}
-                  >
-                    <span className="text-white font-bold">Ganti Password</span>
-                  </button>
+                  {editPasswordMode ? (
+                    <button
+                      type="button"
+                      //   isLoading={isSubmitting}
+                      //   shadow="small"
+                      //   size="large"
+                      //   rounded="rounded"
+                      className="w-2/4 font-poppins-bold text-[16px] bg-[#e8bd22] rounded py-1"
+                      onClick={() => editPassword(user?.id)}
+                    >
+                      <span className="text-white font-bold">Submit</span>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="w-2/4 font-poppins-bold text-[16px] bg-[#e8bd22] rounded py-1"
+                      onClick={() => setEditPasswordMode(true)}
+                    >
+                      <span className="text-white font-bold">
+                        Ubah Password
+                      </span>
+                    </button>
+                  )}
                 </div>
               </div>
               <div>
