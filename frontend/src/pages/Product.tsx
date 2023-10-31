@@ -12,6 +12,10 @@ const Product: React.FC = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>("");
   const [showModal, setShowModal] = useState(false);
   const [dekorasi, setDekorasi] = useState<Array<any>>();
+  const [makeup, setMakeup] = useState<Array<any>>();
+  const [upacaraDanTenda, setUpacaraDanTenda] = useState<Array<any>>();
+  const [dokumentasi, setDokumentasi] = useState<Array<any>>();
+  const [entertainment, setEntertainment] = useState<Array<any>>();
   const getPaket = async () => {
     try {
       setLoading(true);
@@ -35,17 +39,41 @@ const Product: React.FC = () => {
 
   const getDetailPaket = async (id: number) => {
     try {
-      setLoading(true);
+      // setLoading(true);
+
       const response = await paketService.detail(id);
       console.log("response", response?.data);
       setDetailPaket(response?.data);
 
-      let list = response.data.dekorasi;
-      let trim = list.trim();
-      const desc = trim.split("\r\n");
-      console.log("desc", desc);
-      // setDekorasi(desc);
+      let listDekorasi = response?.data?.dekorasi;
+      let trimDekorasi = listDekorasi.trim();
+      const descDekorasi = trimDekorasi.split("\r\n");
+      setDekorasi(descDekorasi);
+
+      let listMakeup = response?.data?.makeup_dan_busana;
+      let trimMakeup = listMakeup.trim();
+      const descMakeup = trimMakeup.split("\r\n");
+      setMakeup(descMakeup);
+
+      let listUpacara = response?.data?.upacara_dan_tenda;
+      let trimUpacara = listUpacara.trim();
+      const descUpacara = trimUpacara.split("\r\n");
+      setUpacaraDanTenda(descUpacara);
+
+      let listDokumentasi = response?.data?.dokumentasi;
+      let trimDokumentasi = listDokumentasi.trim();
+      const descDokumentasi = trimDokumentasi.split("\r\n");
+      setDokumentasi(descDokumentasi);
+
+      let listEntertainment = response?.data?.entertainment;
+      let trimEntertainment = listEntertainment.trim();
+      const descEntertainment = trimEntertainment.split("\r\n");
+      setEntertainment(descEntertainment);
+
       setShowModal(true);
+
+      // console.log("desc", desc);
+      // setDekorasi(desc);
       // console.log("detail", response?.data?.data);
       setLoading(false);
     } catch (error) {}
@@ -206,7 +234,7 @@ const Product: React.FC = () => {
                     <div className=" flex flex-col gap-4">
                       <button
                         className="btn bg-yellow-600 py-1 px-5 text-white font-bold rounded-md w-full "
-                        onClick={() => getDetailPaket(list.id)}
+                        onClick={() => getDetailPaket(list?.id)}
                       >
                         Lihat Detail
                       </button>
@@ -223,10 +251,10 @@ const Product: React.FC = () => {
             </div>
             {showModal ? (
               <>
-                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none w-full">
-                  <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto  fixed inset-0 z-50 outline-none focus:outline-none w-full px-10 ">
+                  <div className="relative w-full md:w-2/4 mx-auto bg-white ">
                     {/*content*/}
-                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full  outline-none focus:outline-none">
                       {/*header*/}
                       <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                         <h3 className="text-3xl font-semibold">
@@ -242,27 +270,81 @@ const Product: React.FC = () => {
                         </button>
                       </div>
                       {/*body*/}
-                      <div className="relative p-6 flex-auto">
-                        <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
-                          1. Dekorasi :
-                        </p>
-                        <ul>{dekorasi?.map((list) => <li>{list}</li>)}</ul>
+                      <div className="p-6 h-[50vh] overflow-x-hidden overflow-y-auto">
+                        <div className="">
+                          <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                            <h1 className="font-bold">1. Dekorasi :</h1>
+                            <ol className="list-decimal  px-8 text-base">
+                              {dekorasi?.map((list) => <li>{list}</li>)}
+                              {/* <li>ss</li>
+                            <li>ss</li>
+                            <li>ss</li> */}
+                            </ol>
+                          </p>
+                        </div>
+                        <div>
+                          <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                            <h1 className="font-bold">
+                              2. Make Up dan Busana :
+                            </h1>
+                            <ol className="list-decimal  px-8 text-base">
+                              {makeup?.map((list) => <li>{list}</li>)}
+                              {/* <li>ss</li>
+                            <li>ss</li>
+                            <li>ss</li> */}
+                            </ol>
+                          </p>
+                        </div>
+                        {detailPaket?.kategori === "rumahan" ? (
+                          <div>
+                            <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                              <h1 className="font-bold">
+                                3. Upacara dan Tenda :
+                              </h1>
+                              <ol className="list-decimal  px-8 text-base">
+                                {upacaraDanTenda?.map((list) => (
+                                  <li>{list}</li>
+                                ))}
+                                {/* <li>ss</li>
+                            <li>ss</li>
+                            <li>ss</li> */}
+                              </ol>
+                            </p>
+                          </div>
+                        ) : (
+                          <div>
+                            <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                              <h1 className="font-bold">3. Entertainment :</h1>
+                              <ol className="list-decimal  px-8 text-base">
+                                {entertainment?.map((list) => <li>{list}</li>)}
+                                {/* <li>ss</li>
+                            <li>ss</li>
+                            <li>ss</li> */}
+                              </ol>
+                            </p>
+                          </div>
+                        )}
+                        <div>
+                          <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                            <h1 className="font-bold">4. Dokumentasi :</h1>
+                            <ol className="list-decimal  px-8 text-base">
+                              {dokumentasi?.map((list) => <li>{list}</li>)}
+                              {/* <li>ss</li>
+                            <li>ss</li>
+                            <li>ss</li> */}
+                            </ol>
+                          </p>
+                        </div>
                       </div>
+
                       {/*footer*/}
                       <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                         <button
-                          className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                          className="text-white bg-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 rounded-md"
                           type="button"
                           onClick={() => setShowModal(false)}
                         >
-                          Close
-                        </button>
-                        <button
-                          className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                          type="button"
-                          onClick={() => setShowModal(false)}
-                        >
-                          Save Changes
+                          Tutup
                         </button>
                       </div>
                     </div>
