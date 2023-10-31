@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { Table } from "flowbite-react";
-import { User } from "../../types";
+import { RegisterOrEditRequest, User } from "../../types";
 import { authService, storageService } from "../../services";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 // enum JenisKelaminEnum {
 //     "L"
@@ -19,6 +20,7 @@ const Profile: React.FC = () => {
   const [tanggalLahir, setTanggalLahir] = useState<string>("");
   const [noHp, setNoHp] = useState<string>("");
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [editPasswordMode, setEditPasswordMode] = useState<boolean>(false);
 
   //   const rev = ReverseMd5({
   //     lettersUpper: false,
@@ -49,6 +51,41 @@ const Profile: React.FC = () => {
       // console.log("responpetugas",(petugas))
     } catch (error) {
       console.log("error", error);
+    }
+  };
+
+  const edit = async (id: any) => {
+    // console.log("id edit", typeof user?.id);
+    // console.log({
+    //   username,
+    //   password,
+    //   namaLengkap,
+    //   jenisKelamin,
+    //   tanggalLahir,
+    //   noHp,
+    // });
+
+    try {
+      const request: RegisterOrEditRequest = {
+        username: username,
+        // password: password,
+        nama_lengkap: namaLengkap,
+        jenis_kelamin: jenisKelamin,
+        tgl_lahir: tanggalLahir,
+        no_telepon: noHp,
+      };
+
+      console.log("request", request);
+      const response = await authService.update(request, id);
+
+      if (response) {
+        setEditMode(false);
+        toast.success("Selamat, Anda berhasil update profil");
+        console.log("responseny", response);
+      }
+    } catch (error: any) {
+      // toast.error(error);
+      console.log("errorx", error);
     }
   };
   useEffect(() => {
@@ -82,19 +119,32 @@ const Profile: React.FC = () => {
               </div>
               <div>
                 <h2>Password</h2>
-                <input
-                  type="password"
-                  className={`my-2  w-full text-black font-poppins-regular border  border-[#e8bd22] rounded px-2 py-1 ${
-                    editMode ? "bg-white" : "bg-gray-200"
-                  }`}
-                  //   errorMessage={errors?.password?.message}
-                  //   {...register("password", { required: "password is required" })}
-                  name="password"
-                  id="password"
-                  disabled={editMode ? false : true}
-                  //   value={password}
-                  //   onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="flex items-center gap-2">
+                  <input
+                    type="password"
+                    className={`my-2  w-full text-black font-poppins-regular border  border-[#e8bd22] rounded px-2 py-1 ${
+                      editPasswordMode ? "bg-white" : "bg-gray-200"
+                    }`}
+                    //   errorMessage={errors?.password?.message}
+                    //   {...register("password", { required: "password is required" })}
+                    name="password"
+                    id="password"
+                    disabled={editPasswordMode ? false : true}
+                    //   value={password}
+                    //   onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    //   isLoading={isSubmitting}
+                    //   shadow="small"
+                    //   size="large"
+                    //   rounded="rounded"
+                    className="w-2/4 font-poppins-bold text-[16px] bg-[#e8bd22] rounded py-1"
+                    onClick={() => setEditPasswordMode(true)}
+                  >
+                    <span className="text-white font-bold">Ganti Password</span>
+                  </button>
+                </div>
               </div>
               <div>
                 <h2>Nama Lengkap</h2>
@@ -109,7 +159,7 @@ const Profile: React.FC = () => {
                   id="password"
                   disabled={editMode ? false : true}
                   value={namaLengkap}
-                  //   onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setNamaLengkap(e.target.value)}
                 />
               </div>
               <div>
@@ -128,13 +178,17 @@ const Profile: React.FC = () => {
                 /> */}
                 <select
                   name="jenisKelamin"
-                  //   onChange={(e) => setStatus(JSON.parse(e.target.value))}
+                  onChange={(e) => setJenisKelamin(e.target.value)}
+                  value={jenisKelamin}
                   className={`my-2  w-full text-black font-poppins-regular border  border-[#e8bd22] rounded px-2 py-1 ${
                     editMode ? "bg-white" : "bg-gray-200"
                   }`}
                   disabled={editMode ? false : true}
                 >
-                  {jenisKelamin === "L" ? (
+                  <option value="L">Laki-Laki</option>
+                  <option value="P"> Perempuan</option>
+
+                  {/* {jenisKelamin === "L" ? (
                     <>
                       <option value="L">Laki-Laki</option>
                       <option value="P"> Perempuan</option>
@@ -144,13 +198,13 @@ const Profile: React.FC = () => {
                       <option value="P">Perempuan</option>
                       <option value="L">Laki-Laki</option>
                     </>
-                  )}
+                  )} */}
                 </select>
               </div>
               <div>
                 <h2>Tanggal Lahir</h2>
                 <input
-                  type="text"
+                  type="date"
                   className={`my-2  w-full text-black font-poppins-regular border  border-[#e8bd22] rounded px-2 py-1 ${
                     editMode ? "bg-white" : "bg-gray-200"
                   }`}
@@ -160,7 +214,7 @@ const Profile: React.FC = () => {
                   disabled={editMode ? false : true}
                   id="password"
                   value={tanggalLahir}
-                  //   onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setTanggalLahir(e.target.value)}
                 />
               </div>
               <div>
@@ -176,7 +230,7 @@ const Profile: React.FC = () => {
                   disabled={editMode ? false : true}
                   id="password"
                   value={noHp}
-                  //   onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setNoHp(e.target.value)}
                 />
               </div>
             </div>
@@ -202,7 +256,7 @@ const Profile: React.FC = () => {
                       //   size="large"
                       //   rounded="rounded"
                       className="mt-3 w-2/4 font-poppins-bold text-[16px] bg-[#e8bd22] rounded py-2"
-                      onClick={() => setEditMode(true)}
+                      onClick={() => edit(user?.id)}
                     >
                       <span className="text-white font-bold">Submit</span>
                     </button>

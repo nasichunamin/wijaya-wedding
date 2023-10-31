@@ -22,3 +22,13 @@ export interface User {
   updatedAt: any;
   deleteAt: any;
 }
+
+export interface RegisterOrEditRequest {
+  username?: string;
+  password?: string;
+  role?: string;
+  nama_lengkap?: string;
+  jenis_kelamin?: string;
+  tgl_lahir?: string;
+  no_telepon?: string;
+}
