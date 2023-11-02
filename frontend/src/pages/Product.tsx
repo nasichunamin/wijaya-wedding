@@ -17,6 +17,7 @@ const Product: React.FC = () => {
   const [upacaraDanTenda, setUpacaraDanTenda] = useState<Array<any>>();
   const [dokumentasi, setDokumentasi] = useState<Array<any>>();
   const [entertainment, setEntertainment] = useState<Array<any>>();
+
   const getPaket = async () => {
     try {
       setLoading(true);
