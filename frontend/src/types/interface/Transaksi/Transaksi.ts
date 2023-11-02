@@ -25,6 +25,7 @@ export interface Transaksi {
   id: number;
   tgl_pembayaran?: string;
   paket_detail?: Paket;
+  bukti_pembayaran?: string;
 }
 
 // export interface ListTransaksi {

@@ -3,6 +3,7 @@ import { AxiosResponse } from "axios";
 import api from "./api.service";
 import {
   ListTransaksiResponse,
+  Transaksi,
   TransaksiRequest,
   TransaksiResponse,
 } from "../types";
@@ -17,7 +18,11 @@ export const create = async (
 export const list = async (
   id: any
 ): Promise<AxiosResponse<ListTransaksiResponse>> => {
-  return await api.post("transaksi/list?id=" + id);
+  return await api.get("transaksi/list?id=" + id);
+};
+
+export const detail = async (id: any): Promise<AxiosResponse<Transaksi>> => {
+  return await api.get("transaksi/detail?id=" + id);
 };
 
 // export const update = async (
