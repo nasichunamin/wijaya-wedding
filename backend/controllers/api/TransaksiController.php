@@ -105,7 +105,7 @@ class TransaksiController extends RestController
 
                 if ($url_gambar->saveAs($saveTo)) {
                     $transaksi->bukti_pembayaran = $url_gambar->name;
-                    $transaksi->status = 'Menunggu Konfirmasi';
+                    $transaksi->status = '3';
                     $transaksi->tgl_pembayaran = date('Y-m-d H:i:s');
                     $transaksi->save();
 
