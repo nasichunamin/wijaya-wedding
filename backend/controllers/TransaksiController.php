@@ -151,7 +151,17 @@ class TransaksiController extends Controller
     {
         $model = $this->findModel($id);
 
-        $model->status = 'Disetujui';
+        $model->status = '4';
+
+        $model->save();
+        return $this->redirect('index'); 
+    }
+
+    public function actionApprovePesanan($id)
+    {
+        $model = $this->findModel($id);
+
+        $model->status = '2';
 
         $model->save();
         return $this->redirect('index'); 
