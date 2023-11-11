@@ -147,7 +147,7 @@ class TransaksiController extends RestController
             
 
             if ($url_gambar) {
-                $saveTo = '../uploads/image/' . $url_gambar->name ;
+                $saveTo = '../uploads/image/bukti/' . $url_gambar->name ;
                
 
 

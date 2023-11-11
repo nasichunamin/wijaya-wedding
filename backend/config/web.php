@@ -90,8 +90,13 @@ $config = [
             'crudTidyOutput' => true,
         ]
     ],
-    
-    
+        // 'cors' => [
+        //     'class' => 'yii\cors\Module',
+        //     'params' => [
+        //         'allowedHosts' => ['http://localhost:3000'], // Ganti dengan URL React JS Anda
+        //     ],
+        // ],
+   
 ];
 
 if (YII_ENV_DEV) {
@@ -117,6 +122,20 @@ if (YII_ENV_DEV) {
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
+    // $config['modules']['cors'] =[
+    //     'class' => 'yii\cors\Module',
+    //         'params' => [
+    //             'allowedHosts' => ['http://localhost:3000'], // Ganti dengan URL React JS Anda
+    //         ],
+    // ]
+    // 'modules' => [
+    //     'cors' => [
+    //         'class' => 'yii\cors\Module',
+    //         'params' => [
+    //             'allowedHosts' => ['http://localhost:3000'], // Ganti dengan URL React JS Anda
+    //         ],
+    //     ],
+    // ],
 }
 
 return $config;

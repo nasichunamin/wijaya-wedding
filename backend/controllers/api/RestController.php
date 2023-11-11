@@ -40,27 +40,46 @@ class RestController extends Controller
         // For cross-domain AJAX request
         $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),
-            'cors'  => [
-                // restrict access to domains:
-                'Origin' => [
-                    'http://localhost:3000', 
-                    'https://localhost:3000', 
-                    'http://127.0.0.1:3000', 
-                    'https://127.0.0.1:3000'
-                ],
-
-                // Allow only POST and PUT methods
-                'Access-Control-Request-Method' => ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
-                // Allow only headers 'X-Wsse'
-                'Access-Control-Request-Headers' => ['content-type', 'Token'],
-                // Allow credentials (cookies, authorization headers, etc.) to be exposed to the browser
-                'Access-Control-Allow-Credentials' => true,
-                // Allow OPTIONS caching
-                // 'Access-Control-Max-Age' => 86400,
-                // Allow the X-Pagination-Current-Page header to be exposed to the browser.
-                // 'Access-Control-Expose-Headers' => ['*'],            // Cache (seconds)
-            ],
         ];
+        // $behaviors['corsFilter'] = [
+        //     'class' => \yii\filters\Cors::className(),
+        //     'cors'  => [
+        //         // restrict access to domains:
+        //         // 'Origin' => [
+        //         //     'http://localhost:3000', 
+        //         //     'https://localhost:3000', 
+        //         //     'http://127.0.0.1:3000', 
+        //         //     'https://127.0.0.1:3000'
+        //         // ],
+
+        //         'Origin' => (YII_ENV_PROD) ? [''] : ['http://localhost:3000', 'http://your.store.com'],
+
+        //         // Allow only POST and PUT methods
+        //         'Access-Control-Request-Method' => ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+        //         // Allow only headers 'X-Wsse'
+        //         'Access-Control-Request-Headers' => ['content-type', 'Token'],
+        //         // Allow credentials (cookies, authorization headers, etc.) to be exposed to the browser
+        //         'Access-Control-Allow-Credentials' => true,
+        //         // Allow OPTIONS caching
+        //         // 'Access-Control-Max-Age' => 86400,
+        //         // Allow the X-Pagination-Current-Page header to be exposed to the browser.
+        //         // 'Access-Control-Expose-Headers' => ['*'],            // Cache (seconds)
+        //     ],
+        //     // 'cors' => [
+        //     //     // restrict access to
+        //     //     'Origin' => (YII_ENV_PROD) ? [''] : ['http://localhost:3000'],
+        //     //     // Allow only POST and PUT methods
+        //     //     'Access-Control-Request-Method' => ['GET', 'HEAD', 'POST', 'PUT'],
+        //     //     // Allow only headers 'X-Wsse'
+        //     //     'Access-Control-Request-Headers' => ['X-Wsse', 'Content-Type'],
+        //     //     // Allow credentials (cookies, authorization headers, etc.) to be exposed to the browser
+        //     //     'Access-Control-Allow-Credentials' => true,
+        //     //     // Allow OPTIONS caching
+        //     //     'Access-Control-Max-Age' => 3600,
+        //     //     // Allow the X-Pagination-Current-Page header to be exposed to the browser.
+        //     //     'Access-Control-Expose-Headers' => ['X-Pagination-Current-Page'],
+        //     // ],
+        // ];
 
         return $behaviors;
     }

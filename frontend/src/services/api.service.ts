@@ -19,6 +19,7 @@ main.interceptors.request.use(
       // Accept: "application/json",
       // "Content-Type": "application/json",
       Token: userToken,
+      // Origin: "http://localhost:3000",
       // userToken,
       // "Access-Control-Allow-Credentials": "true",
       // "Access-Control-Allow-Origin": "*",
