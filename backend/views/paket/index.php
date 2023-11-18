@@ -31,7 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'hotel_id',
                 'value' => function ($model) {
-                    return $model->hotel->nama;
+
+                    if($model->hotel_id !== null) {
+                        return $model->hotel->nama;
+                    }else{
+                        return "tidak ada";
+                    }
                 },
             ],
             'kategori',
