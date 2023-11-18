@@ -38,8 +38,8 @@ class RestController extends Controller
         // ])
         $behaviors = parent::behaviors();
         // For cross-domain AJAX request
-        $behaviors['cors'] = [
-            'class' => Cors::className(),
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
         ];
         // $behaviors['corsFilter'] = [
         //     'class' => \yii\filters\Cors::className(),
@@ -83,17 +83,17 @@ class RestController extends Controller
 
         return $behaviors;
     }
-    // public function beforeAction($action)
-    // {
-    //     ini_set("memory_limit", "2G");
-    //     set_time_limit(3600);
+    public function beforeAction($action)
+    {
+        ini_set("memory_limit", "2G");
+        set_time_limit(3600);
 
-    //     $_GET['_format'] = "json";
+        $_GET['_format'] = "json";
 
-    //     date_default_timezone_set("Asia/Jakarta");
+        date_default_timezone_set("Asia/Jakarta");
 
-    //     return parent::beforeAction($action);
-    // }
+        return parent::beforeAction($action);
+    }
 
     public function output($data, $statusCode = 200)
     {
