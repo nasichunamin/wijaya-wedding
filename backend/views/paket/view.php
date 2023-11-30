@@ -36,8 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'gambar',
                 'format' => 'html',
                 'value' => function ($data) {
-                    return Html::img('../../uploads/image/paket/' . $data['gambar']);
+                    return Html::img('../../uploads/image/paket/' . $data['gambar'], ['class' => 'w-50'] );
                 },
+                // 'className' => 'w-25'
 
             ],
             'dekorasi:ntext',
