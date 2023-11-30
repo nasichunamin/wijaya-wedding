@@ -1,4 +1,61 @@
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { RegisterOrEditRequest } from "../../types";
+import { authService } from "../../services";
+
 export default function Register() {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [namaLengkap, setNamaLengkap] = useState<string>("");
+  const [jenisKelamin, setJenisKelamin] = useState<string>("");
+  const [tanggalLahir, setTanggalLahir] = useState<string>("");
+  const [noTelepon, setNoTelepon] = useState<string>("");
+
+  const register = async () => {
+    const data = {
+      username,
+      password,
+      namaLengkap,
+      jenisKelamin,
+      tanggalLahir,
+      noTelepon,
+    };
+
+    if (username === "") {
+      toast.error("Username tidak boleh kosong");
+    } else if (password === "") {
+      toast.error("Password tidak boleh kosong");
+    } else if (namaLengkap === "") {
+      toast.error("Nama Lengkap tidak boleh kosong");
+    } else if (jenisKelamin === "") {
+      toast.error("Jenis Kelamin tidak boleh kosong");
+    } else if (tanggalLahir === "") {
+      toast.error("Tanggal Lahir tidak boleh kosong");
+    } else if (noTelepon === "") {
+      toast.error("No. Telepon tidak boleh kosong");
+    } else {
+      // console.log({ data });
+      const request: RegisterOrEditRequest = {
+        username: username,
+        password: password,
+        nama_lengkap: namaLengkap,
+        jenis_kelamin: jenisKelamin,
+        tgl_lahir: tanggalLahir,
+        no_telepon: noTelepon,
+        role: "customer",
+      };
+
+      const response = await authService.register(request);
+      if (response) {
+        toast.success(
+          "Selamat Akun anda berhasil dibuat, silahkan login setelah ini"
+        );
+        setTimeout(function () {
+          document.location.href = "/Login";
+        }, 2000);
+      }
+    }
+  };
   return (
     <div className="flex flex-row justify-center h-screen w-screen">
       <div className="flex flex-col  md:px-[114px]  overflow-y-auto h-screen py-16">
@@ -24,7 +81,7 @@ export default function Register() {
               name="username"
               id="username"
               // value={username}
-              // onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <span>Password</span>
             <input
@@ -35,51 +92,63 @@ export default function Register() {
               name="password"
               id="password"
               // value={password}
-              // onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <span>Nama Lengkap</span>
             <input
-              type="password"
+              type="text"
               className="my-2 bg-white text-black font-poppins-regular border  border-[#e8bd22] rounded px-2 py-1"
               //   errorMessage={errors?.password?.message}
               //   {...register("password", { required: "password is required" })}
-              name="password"
-              id="password"
+              name="namaLengkap"
+              id="namaLengkap"
               // value={password}
-              // onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setNamaLengkap(e.target.value)}
             />
             <span>Jenis Kelamin</span>
-            <input
+            <select
+              className="my-2 bg-white text-black font-poppins-regular border  border-[#e8bd22] rounded px-2 py-1"
+              name="jenisKelamin"
+              id="jenisKelamin"
+              onChange={(e) => setJenisKelamin(e.target.value)}
+            >
+              <option value="" disabled>
+                Pilih Jenis Kelamin
+              </option>
+              <option value="L">Laki - Laki</option>
+              <option value="P">Perempuan</option>
+            </select>
+            {/* <input
               type="password"
               className="my-2 bg-white text-black font-poppins-regular border  border-[#e8bd22] rounded px-2 py-1"
               //   errorMessage={errors?.password?.message}
               //   {...register("password", { required: "password is required" })}
-              name="password"
-              id="password"
+              name="jenisKelamin"
+              id="jenisKelamin"
               // value={password}
-              // onChange={(e) => setPassword(e.target.value)}
-            />
+              onChange={(e) => setJenisKelamin(e.target.value)}
+            /> */}
             <span>Tanggal Lahir</span>
             <input
-              type="password"
+              type="date"
               className="my-2 bg-white text-black font-poppins-regular border  border-[#e8bd22] rounded px-2 py-1"
               //   errorMessage={errors?.password?.message}
               //   {...register("password", { required: "password is required" })}
-              name="password"
-              id="password"
+              name="tanggalLahir"
+              id="tanggalLahir"
               // value={password}
-              // onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setTanggalLahir(e.target.value)}
             />
             <span>No. Telepon</span>
             <input
-              type="password"
+              type="text"
               className="my-2 bg-white text-black font-poppins-regular border  border-[#e8bd22] rounded px-2 py-1"
               //   errorMessage={errors?.password?.message}
               //   {...register("password", { required: "password is required" })}
-              name="password"
-              id="password"
+              name="noTelepon"
+              id="noTelepon"
               // value={password}
-              // onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setNoTelepon(e.target.value)}
             />
             <div className="my-4 w-full">
               <button
@@ -89,7 +158,7 @@ export default function Register() {
                 //   size="large"
                 //   rounded="rounded"
                 className="mt-3 w-full font-poppins-bold text-[16px] bg-[#e8bd22] rounded py-2"
-                // onClick={() => login()}
+                onClick={() => register()}
               >
                 <span className="text-white font-bold">Daftar</span>
               </button>

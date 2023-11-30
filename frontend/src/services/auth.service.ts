@@ -25,3 +25,9 @@ export const update = async (
 ): Promise<AxiosResponse<LoginResponse>> => {
   return await api.post("user/update?id=" + id, data);
 };
+
+export const register = async (
+  data: RegisterOrEditRequest
+): Promise<AxiosResponse<LoginResponse>> => {
+  return await api.post("user/create", data);
+};
