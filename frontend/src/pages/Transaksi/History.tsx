@@ -121,7 +121,7 @@ const History: React.FC = () => {
         let data = res.data.data;
         console.log("image", data);
         toast.success("berhasil");
-
+        setShowUploadPembayaran(false);
         // setGetSingle(data);
         // let array = [...getImageDocument];
         // array.push(data.path);
@@ -365,7 +365,7 @@ const History: React.FC = () => {
                       <button
                         className="text-white bg-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 rounded-md"
                         type="button"
-                        onClick={() => setShowBuktiPembayaran(false)}
+                        onClick={() => setShowUploadPembayaran(false)}
                       >
                         Tutup
                       </button>
