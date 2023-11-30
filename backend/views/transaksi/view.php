@@ -37,10 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'gambar',
                 'format' => 'html',
                 'value' => function ($data) {
-                    return Html::img('../../uploads/image/bukti/' . $data['bukti_pembayaran']);
+                    return Html::img('../../uploads/image/bukti/' . $data['bukti_pembayaran'], ['class' => 'w-50'] );
                 },
 
             ],
+            // 'bukti_pembayaran',
             'tgl_pembayaran',
             'alamat_pemesanan:ntext',
             'createdAt',
