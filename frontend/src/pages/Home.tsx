@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { GiLipstick, GiMicrophone, GiFlowers  } from "react-icons/gi";
+import { IoCamera } from "react-icons/io5";
+import { FaPeopleGroup } from "react-icons/fa6"
+import { CiViewTimeline } from "react-icons/ci"
+import { IoTime } from "react-icons/io5";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { paketService } from "../services";
 import { Paket } from "../types";
@@ -37,10 +42,10 @@ const Home: React.FC = () => {
                 </div>
                 <div className="w-full mt-2 ">
                   <h1 className="font-poppins-medium text-5xl md:text-7xl mb-4">
-                    Made Perfect{" "}
+                    Buatlah Sempurna{" "}
                   </h1>
                   <h1 className="font-poppins-medium text-5xl md:text-7xl">
-                    Your Dream Wedding{" "}
+                    Pernikahan Impian Anda{" "}
                   </h1>
                 </div>
               </div>
@@ -57,15 +62,10 @@ const Home: React.FC = () => {
             <div className="flex flex-col justify-center">
               <h1 className="text-5xl lg:text-[56px] mb-2 ">Tentang Kami</h1>
               <h3 className="text-3xl lg:text-4xl">
-                We are a team of passionate and experienced wedding planners
+              Kami adalah tim wedding organizer yang berpengalaman.
               </h3>
               <h6 className="text-base mt-4">
-                Our team of wedding planners is passionate about creating
-                unforgettable wedding experiences. We understand that every
-                wedding is unique, and we work closely with our clients to
-                ensure that their vision becomes a reality. Our approach is
-                personal, friendly, and professional, and we strive to make the
-                planning process as stress-free as possible.
+              Tim wedding organizer kami dapat menciptakan pengalaman pernikahan yang tak terlupakan. Kami memahami bahwa setiap pernikahan itu unik, dan kami bekerja sama dengan klien kami untuk memastikan visi dan misi mereka menjadi kenyataan.
               </h6>
               <button className="border border-[#9D6A42] w-2/4 xl:w-1/4 rounded-full p-2 mt-4 hover:bg-[#9D6A42] hover:text-white">
                 Pesan Sekarang
@@ -78,7 +78,7 @@ const Home: React.FC = () => {
           <div className=" mt-10 grid grid-cols-1 gap-6 md:grid-cols-2  sm:w-auto ">
             <div className="rounded-xl bg-white p-10  flex flex-col gap-2 items-start shadow-xl border border-[#f5f5f5]">
               <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#9D6A42] text-[32px] text-white">
-                <FaMoneyBillAlt />
+                <GiLipstick />
               </div>
 
               <div className="mt-2 font-poppins-bold text-xl md:text-2xl text-center">
@@ -86,14 +86,12 @@ const Home: React.FC = () => {
               </div>
 
               <div className="mt-1 font-poppins-medium text-base ">
-                Lorem ipsum dolor sit amet consectetur. Augue non malesuada
-                placerat faucibus nam purus sem. Urna pulvinar porttitor
-                dignissim congue pellentesque ac hac.
+              Make Up adalah proses menciptakan tampilan yang mempesona dan memukau bagi kedua mempelai baik mempelai wanita ataupun mempelai pria pada hari pernikahan.
               </div>
             </div>
             <div className="rounded-xl bg-white p-10  flex flex-col gap-2 items-start shadow-xl border border-[#f5f5f5]">
               <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#9D6A42] text-[32px] text-white">
-                <FaMoneyBillAlt />
+                <GiFlowers  />
               </div>
 
               <div className="mt-2 font-poppins-bold text-xl md:text-2xl text-center">
@@ -101,14 +99,12 @@ const Home: React.FC = () => {
               </div>
 
               <div className="mt-1 font-poppins-medium text-base ">
-                Lorem ipsum dolor sit amet consectetur. Augue non malesuada
-                placerat faucibus nam purus sem. Urna pulvinar porttitor
-                dignissim congue pellentesque ac hac.
+              Dekorasi pernikahan mencakup pengaturan estetika dan tata letak ruang acara pernikahan. Hal ini meliputi penggunaan bunga, kain, pencahayaan, dan elemen dekoratif lainnya untuk menciptakan suasana yang sesuai dengan tema pernikahan.
               </div>
             </div>
             <div className="rounded-xl bg-white p-10  flex flex-col gap-2 items-start shadow-xl border border-[#f5f5f5]">
               <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#9D6A42] text-[32px] text-white">
-                <FaMoneyBillAlt />
+                <IoCamera />
               </div>
 
               <div className="mt-2 font-poppins-bold text-xl md:text-2xl text-center">
@@ -116,14 +112,12 @@ const Home: React.FC = () => {
               </div>
 
               <div className="mt-1 font-poppins-medium text-base ">
-                Lorem ipsum dolor sit amet consectetur. Augue non malesuada
-                placerat faucibus nam purus sem. Urna pulvinar porttitor
-                dignissim congue pellentesque ac hac.
+              Dokumentasi merupakan pengambilan gambar dan video dari acara pernikahan secara keseluruhan. Hal ini termasuk momen-momen penting yang ada dalam acara.
               </div>
             </div>
             <div className="rounded-xl bg-white p-10  flex flex-col gap-2 items-start shadow-xl border border-[#f5f5f5]">
               <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#9D6A42] text-[32px] text-white">
-                <FaMoneyBillAlt />
+                <GiMicrophone />
               </div>
 
               <div className="mt-2 font-poppins-bold text-xl md:text-2xl text-center">
@@ -131,28 +125,26 @@ const Home: React.FC = () => {
               </div>
 
               <div className="mt-1 font-poppins-medium text-base ">
-                Lorem ipsum dolor sit amet consectetur. Augue non malesuada
-                placerat faucibus nam purus sem. Urna pulvinar porttitor
-                dignissim congue pellentesque ac hac.
+              Hiburan dalam pernikahan mencakup berbagai elemen yang bertujuan untuk menambahkan kesenangan dan menghidupkan suasana pernikahan. Hal ini biasanya pertunjukan musik dan yang lainnya.
               </div>
             </div>
           </div>
         </div>
 
         <div className="container mx-auto mt-32">
-          <h1 className="text-center text-4xl">Benefit</h1>
+          <h1 className="text-center text-4xl">Keuntungan</h1>
           <div className=" mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4  sm:w-auto ">
             <div className="rounded-xl bg-white p-10  flex flex-col gap-2 items-start ">
               <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#9D6A42] text-[32px] text-white">
-                <FaMoneyBillAlt />
+                <IoTime />
               </div>
 
               <div className="mt-2 font-poppins-bold text-xl md:text-2xl ">
-                Save Times and Energy
+                Menghemat waktu dan tenaga
               </div>
 
               <div className="mt-1 font-poppins-medium text-base ">
-                By Using Wedding organizer you will save times and energy
+              Manajemen anggaran dan komunikasi digital, pasangan dapat menghemat waktu dan tenaga.
               </div>
             </div>
             <div className="rounded-xl bg-white p-10  flex flex-col gap-2 items-start ">
@@ -161,37 +153,37 @@ const Home: React.FC = () => {
               </div>
 
               <div className="mt-2 font-poppins-bold text-xl md:text-2xl ">
-                Budget Management
+                Pengelolaan Anggaran
               </div>
 
               <div className="mt-1 font-poppins-medium text-base ">
-                By Using Wedding organizer you will save times and energy
+              Membantu calon pengantin mengontrol dan memantau pengeluaran mereka selama proses perencanaan pernikahan.
               </div>
             </div>
             <div className="rounded-xl bg-white p-10  flex flex-col gap-2 items-start ">
               <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#9D6A42] text-[32px] text-white">
-                <FaMoneyBillAlt />
+                <CiViewTimeline />
               </div>
 
               <div className="mt-2 font-poppins-bold text-xl md:text-2xl ">
-                Efficient Management
+                Lebih Efisien
               </div>
 
               <div className="mt-1 font-poppins-medium text-base ">
-                By Using Wedding organizer you will save times and energy
+              Manajemen anggaran dan komunikasi digital, pasangan dapat menjadikan proses pernikahan lebih teratur dan efisien.
               </div>
             </div>
             <div className="rounded-xl bg-white p-10  flex flex-col gap-2 items-start ">
               <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#9D6A42] text-[32px] text-white">
-                <FaMoneyBillAlt />
+                <FaPeopleGroup />
               </div>
 
               <div className="mt-2 font-poppins-bold text-xl md:text-2xl ">
-                Handling Unexpected Situation
+                Mengatasi situasi tak terduga
               </div>
 
               <div className="mt-1 font-poppins-medium text-base ">
-                By Using Wedding organizer you will save times and energy
+              Memberikan solusi saat ada peristiwa yang tidak terduga atau perubahan pada rencana pernikahan.
               </div>
             </div>
           </div>
