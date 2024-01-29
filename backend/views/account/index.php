@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'deleteAt',
             [
                 'class' => ActionColumn::className(),
-    'template' => '{view} {delete}', // Hanya menampilkan tombol view (detail) dan delete (hapus)
+    'template' => '{view}', // Hanya menampilkan tombol view (detail) 
     'urlCreator' => function ($action, Account $model, $key, $index, $column) {
         return Url::toRoute([$action, 'id' => $model->id]);
     },
