@@ -106,6 +106,7 @@ const History: React.FC = () => {
       form.append("bukti_pembayaran", fileupload);
     });
 
+    // console.log({ form });
     axios
       .post(
         "http://localhost/fullstack-wijaya-wedding-github-amin/backend/web/api/transaksi/pembayaran?id=" +
