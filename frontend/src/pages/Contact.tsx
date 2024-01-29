@@ -1,6 +1,17 @@
 "use client";
 
+import { useState } from "react";
+
 export default function Contact() {
+  // https://wa.me/6289685434387?text=nama%20%3A%20falah%0Aisi%20%3A%20halo
+  const [name, setName] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+
+  const sendMessage = async () => {
+    // console.log({ name, message });
+    // +6287846671397
+    window.location.href = `https://wa.me/6287846671397?text=Nama%20Customer%20%3A%20${name}%0APesan%20%3A%20${message}`;
+  };
   return (
     <>
       <div className="bg-[#F7F3EF] text-[#9D6A42]">
@@ -28,14 +39,16 @@ export default function Contact() {
                         Nama
                       </label>
                       <input
-                        type="nama"
-                        id="email"
+                        type="text"
+                        id="name"
                         className="bg-white border border-gray-300 text-gray-500 text-base rounded-lg focus:ring-grey-400 focus:border-grey-400 block w-full p-2.5 "
                         placeholder="Masukkan nama kamu"
                         required={true}
+                        name="name"
+                        onChange={(e) => setName(e.target.value)}
                       />
                     </div>
-                    <div className="w-full mt-4 md:mt-0">
+                    {/* <div className="w-full mt-4 md:mt-0">
                       <label
                         htmlFor="email"
                         className="block mb-2 text-base font-inter-medium text-[#344054] text-left"
@@ -49,9 +62,9 @@ export default function Contact() {
                         placeholder="Masukkan no telp"
                         required={true}
                       />
-                    </div>
+                    </div> */}
                   </div>
-                  <div className="mb-3 w-full">
+                  {/* <div className="mb-3 w-full">
                     <label
                       htmlFor="nama"
                       className="block mb-2 text-base font-inter-medium text-[#344054] text-left"
@@ -65,7 +78,7 @@ export default function Contact() {
                       placeholder="you@company.com"
                       required={true}
                     />
-                  </div>
+                  </div> */}
                   <div className="mb-3 w-full">
                     <label
                       htmlFor="nama"
@@ -74,13 +87,15 @@ export default function Contact() {
                       Pesan
                     </label>
                     <textarea
-                      id="pesan"
+                      id="message"
                       className="bg-white border border-gray-300 text-gray-500 text-base rounded-lg focus:ring-grey-400 focus:border-grey-400 block w-full p-2.5 "
                       required={true}
                       rows={5}
+                      name="message"
+                      onChange={(e) => setMessage(e.target.value)}
                     ></textarea>
                   </div>
-                  <div className="flex items-start mb-3">
+                  {/* <div className="flex items-start mb-3">
                     <div className="flex items-center h-5">
                       <input
                         id="remember"
@@ -96,9 +111,13 @@ export default function Contact() {
                     >
                       Anda setuju dengan kebijakan privasi
                     </label>
-                  </div>
+                  </div> */}
                   <div className="">
-                    <button className="rounded-full bg-black text-white px-6 py-3 flex gap-2.5 justify-center items-center text-lg font-bold font-inter-bold w-full">
+                    <button
+                      type="button"
+                      className="rounded-full bg-black text-white px-6 py-3 flex gap-2.5 justify-center items-center text-lg font-bold font-inter-bold w-full"
+                      onClick={() => sendMessage()}
+                    >
                       Kirim Pesan
                     </button>
                   </div>

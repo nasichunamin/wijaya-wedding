@@ -86,6 +86,9 @@ const CreateTransaksi: React.FC = () => {
     } catch (error) {}
   };
   useEffect(() => {
+    // if (!profilUser) {
+    //   document.location.href = "/login";
+    // }
     getPaket();
     // console.log({ paket });
   });

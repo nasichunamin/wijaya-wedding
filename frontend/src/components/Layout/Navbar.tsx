@@ -117,7 +117,7 @@ export function Navbar() {
             </li>
             <li className={`hover:duration-200 py-3 pr-1 pl-1 `}>
               <a
-                href="/about"
+                href="/#portofolio"
                 className={`block rounded   font-poppins-medium text-base hover:no-underline  ${
                   showMobileNav
                     ? " md:text-[#e8bd22] text-black hover:text-[#e8bd22] "

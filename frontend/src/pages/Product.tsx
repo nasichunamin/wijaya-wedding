@@ -3,6 +3,7 @@ import { paketService } from "../services";
 import { Paket } from "../types";
 import { convertRupiahs } from "../components/ConvertRupiah/indexConverRupiah";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Product: React.FC = () => {
   const [paket, setPaket] = useState<Array<Paket>>();
@@ -17,6 +18,7 @@ const Product: React.FC = () => {
   const [upacaraDanTenda, setUpacaraDanTenda] = useState<Array<any>>();
   const [dokumentasi, setDokumentasi] = useState<Array<any>>();
   const [entertainment, setEntertainment] = useState<Array<any>>();
+  const profilUser = useSelector((state: any) => state.user);
 
   const getPaket = async () => {
     try {
@@ -247,7 +249,11 @@ const Product: React.FC = () => {
                           //   (document.location.href = `/Pesan?id=${list?.id}`)
                           // }
                         >
-                          <Link to={`/Pesan/${list?.id}`}>Pesan Sekarang</Link>
+                          <Link
+                            to={profilUser ? `/Pesan/${list?.id}` : `/login`}
+                          >
+                            Pesan Sekarang
+                          </Link>
                         </button>
                       </div>
                     </div>

@@ -243,7 +243,7 @@ const Home: React.FC = () => {
             </a>
           </div>
         </div>
-        <div className="container mx-auto mt-24">
+        <div className="container mx-auto mt-24" id="portofolio">
           <h1 className="text-center text-4xl">Portofolio</h1>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10 px-4 md:px-0">
